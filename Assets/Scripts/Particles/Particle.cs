@@ -33,6 +33,9 @@ namespace Particles
 
         #region Monobehavior Implementations
 
+
+
+
         /// <summary>
         /// set rigidbody before start
         /// </summary>
@@ -46,9 +49,11 @@ namespace Particles
         /// <summary>
         ///  Start is called before the first frame update, gets array of all particles, sets up + - visuals
         /// </summary>
-        void Start()
+        private void Start()
         {
-             
+            _k = 9 * Mathf.Pow(10, 9);
+
+
             if (_charge > 0)
             {
                 GetComponentsInChildren<TextMeshProUGUI>()[0].text = "+";
@@ -73,6 +78,7 @@ namespace Particles
             {
                 foreach (Particle particle in ParticleManager.GetParticles())
                 {
+
                     if (particle != this || !particle.IsGrabbed())
                     {
                         ApplyCoulombsLaw(particle);
@@ -109,6 +115,7 @@ namespace Particles
             {
                 return;
             }
+
             _rb.AddForce(GetForceValue(particle) * GetDirectonalVector(particle));
         }
 
@@ -136,9 +143,16 @@ namespace Particles
 
         #endregion
 
-        
+
 
         #region Public API
+
+        public Particle(float charge, int exponent=-5)
+        {
+            _charge = charge;
+            _exponent = exponent;
+        }
+
         /// <summary>
         /// method to return charge to other classes
         /// </summary>
