@@ -162,6 +162,12 @@ namespace Particles
             return _charge * (Mathf.Pow(10, _exponent));
         }
 
+        public void SetCharge(float charge, int exponent = -5)
+        {
+            _charge = charge;
+            _exponent = exponent;
+        }
+
         public void Grab(bool grabbed) 
         {
             if (grabbed)

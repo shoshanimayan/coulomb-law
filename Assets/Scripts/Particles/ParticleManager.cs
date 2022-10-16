@@ -67,15 +67,7 @@ namespace Particles
         public static void AddParticle(GameObject ParticleObject)
         {
             s_particles.Add(ParticleObject.GetComponent<Particle>());
-            /*switch (Ptype)
-            {
-                case ParticleType.Postive:
-                    s_particles.Add(new Particle(1));
-                    break;
-                case ParticleType.Negative:
-                    s_particles.Add(new Particle(-1));
-                    break;
-            }*/
+           
 
 
         }
