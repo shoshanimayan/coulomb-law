@@ -25,6 +25,10 @@ namespace Particles
 
         //rigidbody for applying force
         private Rigidbody _rb;
+
+        //is grabbed
+        private bool _grabbed;
+
         #endregion
 
         #region Monobehavior Implementations
@@ -65,11 +69,14 @@ namespace Particles
         /// </summary>
         private void FixedUpdate()
         {
-            foreach (Particle particle in ParticleManager.GetParticles())
+            if (!_grabbed)
             {
-                if (particle != this)
+                foreach (Particle particle in ParticleManager.GetParticles())
                 {
-                    ApplyCoulombsLaw(particle);
+                    if (particle != this || !particle.IsGrabbed())
+                    {
+                        ApplyCoulombsLaw(particle);
+                    }
                 }
             }
         }
@@ -139,6 +146,23 @@ namespace Particles
         public float GetCharge()
         {
             return _charge * (Mathf.Pow(10, _exponent));
+        }
+
+        public void Grab(bool grabbed) 
+        {
+            if (grabbed)
+            {
+                _grabbed = true;
+            }
+            else
+            {
+                _grabbed = false;
+            }
+        }
+
+        public bool IsGrabbed()
+        {
+            return _grabbed;
         }
 
         #endregion

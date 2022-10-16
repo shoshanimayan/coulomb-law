@@ -12,6 +12,8 @@ public interface IParticle
     /// </summary>
     /// <returns>float charge </returns>
     public float GetCharge();
+    public void Grab(bool grabbed);
 
-    
+    public bool IsGrabbed();
+
 }
