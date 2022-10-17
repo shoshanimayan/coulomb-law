@@ -79,7 +79,7 @@ namespace Particles
                 foreach (Particle particle in ParticleManager.GetParticles())
                 {
 
-                    if (particle != this || !particle.IsGrabbed())
+                    if (particle != this && !particle.IsGrabbed())
                     {
                         ApplyCoulombsLaw(particle);
                     }

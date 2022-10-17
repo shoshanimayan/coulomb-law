@@ -19,6 +19,8 @@ namespace Interaction.Manager {
 
         private ParticleType _particleType= ParticleType.Postive;
         private float _distance;
+        
+        private GameObject _grabbedObj;
         #endregion
 
         #region Private Methods
@@ -31,30 +33,77 @@ namespace Interaction.Manager {
 
         private void Update()
         {
-            
-                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-                {
-                   
+            RaycastHit hit;
 
-                    // Construct a ray from the current touch coordinates
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                    // Create a particle if hit
-                    if (!Physics.Raycast(ray))
-                    {
-                        CreateParticle(ray.GetPoint(_distance), Quaternion.identity);
-                    }
-                }
-                else if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began )
+            {
+
+
+                // Construct a ray from the current touch coordinates
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                // Create a particle if hit
+                if (!Physics.Raycast(ray, out hit))
                 {
-                    
-                    // Construct a ray from the current touch coordinates
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    // Create a particle if hit
-                    if (!Physics.Raycast(ray))
+                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                     {
                         CreateParticle(ray.GetPoint(_distance), Quaternion.identity);
                     }
                 }
+                else
+                {
+                    _grabbedObj = hit.collider.gameObject;
+                    _grabbedObj.GetComponent<Particle>().Grab(true);
+                }
+            }
+            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                if (_grabbedObj)
+                {
+                    _grabbedObj.GetComponent<Particle>().Grab(false);
+                    _grabbedObj = null;
+                }
+            }
+            else if (Input.GetMouseButtonDown(0))
+            {
+
+                // Construct a ray from the current touch coordinates
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                // Create a particle if hit
+                if (!Physics.Raycast(ray, out hit))
+                {
+                    if (!EventSystem.current.IsPointerOverGameObject())
+                    {
+                        CreateParticle(ray.GetPoint(_distance), Quaternion.identity);
+                    }
+                }
+                else
+                {
+                    _grabbedObj = hit.collider.gameObject;
+                    _grabbedObj.GetComponent<Particle>().Grab(true);
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                if (_grabbedObj)
+                {
+                    _grabbedObj.GetComponent<Particle>().Grab(false);
+                    _grabbedObj = null;
+                }
+            }
+
+            
+            
+            if (_grabbedObj) {
+                if (Input.touchCount > 0 && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    var pos = Camera.main.ScreenPointToRay(Input.GetTouch(0).position).GetPoint(_distance);
+                    _grabbedObj.transform.position = new Vector3(pos.x, pos.y, 0);
+                }
+                else if (Input.GetMouseButton(0)) {
+                    var pos = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(_distance);
+                    _grabbedObj.transform.position = new Vector3(pos.x, pos.y, 0);
+                }
+            }
             
         }
 
