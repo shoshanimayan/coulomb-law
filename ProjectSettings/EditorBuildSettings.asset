@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Oculus/Interaction/Samples/Scenes/Features/HandGrab.unity
+    guid: 1ca1035b12c67f24d81e7bc5ad627d76
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 3b428cc8ef070f44aa5ebf612026e1cb, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b3db8bd2b2e99774498a26c86049a94f, type: 2}
