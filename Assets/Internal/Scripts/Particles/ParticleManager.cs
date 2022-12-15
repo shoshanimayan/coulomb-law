@@ -17,7 +17,8 @@ namespace Particles
         [Tooltip("particle prefab")]
         [SerializeField] private GameObject _prefab;
 
-
+        [Tooltip("spawn location")]
+        [SerializeField] private GameObject _SpawnPoint;
         #endregion
 
         #region Static Variables
@@ -25,8 +26,8 @@ namespace Particles
         //static variable implementation to get all particles to every other particle
         private static List<Particle> s_particles;
 
-        //material for postivie and negative particles
-        private static Material s_positiveMaterial, s_negativeMaterial;
+        //material for postivie, negative, and grabbed particles
+        private static Material s_positiveMaterial, s_negativeMaterial,s_heldMaterial;
 
         #endregion
 
@@ -44,16 +45,18 @@ namespace Particles
             s_particles = new List<Particle>( FindObjectsOfType(typeof(Particle)) as Particle[]);
             s_positiveMaterial = Resources.Load<Material>("Materials/Positive");
             s_negativeMaterial= Resources.Load<Material>("Materials/Negative") ;
+            s_heldMaterial = Resources.Load<Material>("Materials/Held");
+
         }
 
         #endregion
 
         #region Private Methods
 
-        private void CreateParticle(Vector3 position, Quaternion rotation)
+        private void CreateParticle()
         {
-            position = new Vector3(position.x, position.y, 0);
-            var particle = Instantiate(_prefab, position, rotation);
+            var position = _SpawnPoint.transform.position;
+            var particle = Instantiate(_prefab, position, Quaternion.identity);
             var charge = 0;
             switch (_particleType)
             {
@@ -72,6 +75,8 @@ namespace Particles
         {
             s_particles.Add(ParticleObject.GetComponent<Particle>());
         }
+
+       
 
         #endregion
 
@@ -105,7 +110,13 @@ namespace Particles
             return s_negativeMaterial;
         }
 
-      
+
+        public static Material GetHeldMaterial()
+        {
+            return s_heldMaterial;
+        }
+
+
 
         public void SetParticleType(int index)
         {
@@ -114,6 +125,17 @@ namespace Particles
                 throw new Exception("index out of range");
             }
             _particleType = (ParticleType)index;
+            CreateParticle();
+        }
+
+
+        public void ClearParticles()
+        {
+            foreach (var partical in s_particles)
+            {
+                Destroy(partical);
+            }
+            s_particles.Clear();
         }
 
 

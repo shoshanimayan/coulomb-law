@@ -29,6 +29,9 @@ namespace Particles
         //is grabbed
         private bool _grabbed;
 
+        private Material _mat;
+        private string _sign;
+
         #endregion
 
         #region Monobehavior Implementations
@@ -57,7 +60,9 @@ namespace Particles
             if (_charge > 0)
             {
                 GetComponentsInChildren<TextMeshProUGUI>()[0].text = "+";
+                _sign = "+";
                 GetComponent<Renderer>().material = ParticleManager.GetPositiveMaterial();
+                _mat= ParticleManager.GetPositiveMaterial();
 
             }
             else
@@ -76,6 +81,7 @@ namespace Particles
         {
             if (!_grabbed)
             {
+                
                 foreach (Particle particle in ParticleManager.GetParticles())
                 {
 
@@ -170,14 +176,21 @@ namespace Particles
 
         public void Grab(bool grabbed) 
         {
+           
+                _grabbed = grabbed;
+                _rb.isKinematic = grabbed;
             if (grabbed)
             {
-                _grabbed = true;
+                GetComponentsInChildren<TextMeshProUGUI>()[0].text = "";
+                GetComponent<Renderer>().material = ParticleManager.GetHeldMaterial();
+              
             }
             else
             {
-                _grabbed = false;
+                GetComponentsInChildren<TextMeshProUGUI>()[0].text = _sign;
+                GetComponent<Renderer>().material = _mat;
             }
+            
         }
 
         public bool IsGrabbed()
