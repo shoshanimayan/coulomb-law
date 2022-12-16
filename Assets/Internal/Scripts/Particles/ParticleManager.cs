@@ -133,7 +133,7 @@ namespace Particles
         {
             foreach (var partical in s_particles)
             {
-                Destroy(partical);
+                Destroy(partical.gameObject);
             }
             s_particles.Clear();
         }

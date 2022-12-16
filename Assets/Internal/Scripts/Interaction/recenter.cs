@@ -7,7 +7,7 @@ public class recenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        OVRManager.display.RecenterPose();
     }
 
     // Update is called once per frame

@@ -19,7 +19,9 @@ GameObject:
   - component: {fileID: 3667932880965618226}
   - component: {fileID: 3667932880965618229}
   - component: {fileID: 3667932880965618228}
-  m_Layer: 0
+  - component: {fileID: 772169300}
+  - component: {fileID: 772169299}
+  m_Layer: 6
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +238,8 @@ MonoBehaviour:
     _unselectMode: 0
   _movementProvider: {fileID: 0}
   _handAligment: 1
-  _handGrabPoses: []
+  _handGrabPoses:
+  - {fileID: 772169300}
 --- !u!114 &3667932880965618226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,13 +271,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _constraints:
-    ConstraintsAreRelative: 0
+    ConstraintsAreRelative: 1
     MinScale:
-      Constrain: 0
-      Value: 0
+      Constrain: 1
+      Value: 1
     MaxScale:
-      Constrain: 0
-      Value: 0
+      Constrain: 1
+      Value: 1
 --- !u!114 &3667932880965618228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +290,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3236b8f205019504589358e7e0412a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &772169300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667932880965618223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _relativeTo: {fileID: 3667932880965618232}
+  _surface: {fileID: 772169299}
+  _usesHandPose: 0
+  _handPose:
+    _handedness: 0
+    _fingersFreedom: 0200000002000000010000000100000000000000
+    _jointRotations:
+    - {x: -0.3753869, y: 0.4245841, z: -0.007778856, w: -0.8238644}
+    - {x: -0.2602303, y: 0.02433088, z: 0.125678, w: -0.9570231}
+    - {x: 0.08270377, y: -0.0769617, z: -0.08406223, w: -0.9900357}
+    - {x: -0.08350593, y: 0.06501573, z: -0.05827406, w: -0.9926752}
+    - {x: -0.03068309, y: -0.01885559, z: 0.04328144, w: -0.9984136}
+    - {x: 0.02585241, y: -0.007116061, z: 0.003292944, w: -0.999635}
+    - {x: 0.016056, y: -0.02714872, z: -0.072034, w: -0.9969034}
+    - {x: 0.009066326, y: -0.05146559, z: 0.05183575, w: -0.9972874}
+    - {x: 0.01122823, y: -0.004378874, z: -0.001978267, w: -0.9999254}
+    - {x: 0.03431955, y: -0.004611839, z: -0.09300701, w: -0.9950631}
+    - {x: 0.05315936, y: -0.1231034, z: 0.04981349, w: -0.9897162}
+    - {x: 0.03363252, y: -0.00278984, z: 0.00567602, w: -0.9994143}
+    - {x: 0.003477462, y: 0.02917945, z: -0.02502854, w: -0.9992548}
+    - {x: 0.207036, y: -0.1403428, z: 0.0183118, w: -0.9680417}
+    - {x: -0.09111304, y: 0.00407137, z: 0.02812923, w: -0.9954349}
+    - {x: 0.03761665, y: -0.04293772, z: -0.01328605, w: -0.9982809}
+    - {x: -0.0006447434, y: 0.04917067, z: -0.02401883, w: -0.9985014}
+--- !u!114 &772169299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667932880965618223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8951a656a7c00e74094166ef415cdce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 3667932880965618231}
 --- !u!1 &3667932882415715160
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +350,7 @@ GameObject:
   - component: {fileID: 3667932882415715163}
   - component: {fileID: 3667932882415715165}
   - component: {fileID: 3667932882415715162}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +487,7 @@ GameObject:
   - component: {fileID: 3667932882519247807}
   - component: {fileID: 3667932882519247804}
   - component: {fileID: 3667932882519247805}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

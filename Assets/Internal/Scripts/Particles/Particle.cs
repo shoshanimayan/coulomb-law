@@ -69,6 +69,7 @@ namespace Particles
             {
                 GetComponentsInChildren<TextMeshProUGUI>()[0].text = "-";
                 GetComponent<Renderer>().material = ParticleManager.GetNegativeMaterial();
+                _mat = ParticleManager.GetNegativeMaterial();
 
             }
         }

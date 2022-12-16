@@ -12,7 +12,7 @@ public class FollowCamera : MonoBehaviour
     /// <summary>
     ///  have transform always face camera 
     /// </summary>
-    void update()
+    void Update()
     {
         transform.LookAt(Camera.main.transform);
     }

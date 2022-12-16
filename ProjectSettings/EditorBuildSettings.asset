@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Oculus/Interaction/Samples/Scenes/Features/HandGrab.unity
-    guid: 1ca1035b12c67f24d81e7bc5ad627d76
   - enabled: 1
     path: Assets/Internal/Scenes/TestScene.unity
     guid: fbbf9d797eb19494e822aa2ca945a3e7
